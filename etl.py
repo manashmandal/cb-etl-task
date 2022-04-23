@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-c = Client(api_server="http://apollo:4200")
+c = Client()
 try:
     c.create_tenant("CB_ETL", "cb-etl")
 except:
