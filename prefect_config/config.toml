@@ -1,0 +1,107 @@
+debug = false
+home_dir = "/home/manash/.prefect"
+backend = "server"
+
+[server]
+host = "http://apollo"
+port = 4200
+host_port = 4200
+host_ip = "0.0.0.0"
+endpoint = "http://apollo:4200"
+
+  [server.database]
+  host = "postgres"
+  port = 5432
+  host_port = 5432
+  name = "prefect_server"
+  username = "prefect"
+  password = "test-password"
+  connection_url = "postgresql://prefect:test-password@localhost:5432/prefect_server"
+  volume_path = "/home/manash/.prefect/pg_data"
+
+  [server.graphql]
+  host = "0.0.0.0"
+  port = 4201
+  host_port = 4201
+  debug = false
+  path = "/graphql/"
+
+  [server.hasura]
+  host = "hasura"
+  port = 3000
+  host_port = 3000
+  admin_secret = ""
+  claims_namespace = "hasura-claims"
+  graphql_url = "http://localhost:3000/v1alpha1/graphql"
+  ws_url = "ws://localhost:3000/v1alpha1/graphql"
+  execute_retry_seconds = 10
+
+  [server.ui]
+  host = "http://ui"
+  port = 8080
+  host_port = 8_080
+  host_ip = "0.0.0.0"
+  endpoint = "http://ui:8080"
+  apollo_url = "http://apollo:4200/graphql"
+
+  [server.telemetry]
+  enabled = true
+
+[cloud]
+api = "http://apollo:4200"
+endpoint = "https://api.prefect.io"
+graphql = "http://apollo:4200/graphql"
+use_local_secrets = true
+heartbeat_interval = 30
+heartbeat_mode = "process"
+check_cancellation_interval = 15
+diagnostics = false
+request_timeout = 15
+send_flow_run_logs = true
+logging_heartbeat = 5
+queue_interval = 30
+api_key = ""
+tenant_id = ""
+
+  [cloud.agent]
+  name = "agent"
+  labels = [ ]
+  level = "INFO"
+  auth_token = ""
+  agent_address = ""
+  kubernetes_keep_alive = false
+
+    [cloud.agent.resource_manager]
+    loop_interval = 60
+
+[logging]
+level = "INFO"
+format = "[%(asctime)s] %(levelname)s - %(name)s | %(message)s"
+log_attributes = [ ]
+datefmt = "%Y-%m-%d %H:%M:%S%z"
+extra_loggers = [ ]
+
+[flows]
+eager_edge_validation = false
+run_on_schedule = true
+checkpointing = false
+
+[flows.defaults.storage]
+add_default_labels = true
+default_class = "prefect.storage.Local"
+
+[tasks.defaults]
+max_retries = 0
+
+[engine.executor]
+default_class = "prefect.executors.LocalExecutor"
+
+  [engine.executor.dask]
+  address = ""
+  cluster_class = "distributed.deploy.local.LocalCluster"
+
+[engine.flow_runner]
+default_class = "prefect.engine.flow_runner.FlowRunner"
+
+[engine.task_runner]
+default_class = "prefect.engine.task_runner.TaskRunner"
