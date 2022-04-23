@@ -62,7 +62,7 @@ The PostgreSQL configuration is given below,
 
 ```python
 dbconfig = {
-    "host": "postgres",
+    "host": "localhost",
     "port": "5432",
     "database": "prefect_server",
     "user": "prefect",
