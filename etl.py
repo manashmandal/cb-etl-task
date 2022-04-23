@@ -11,6 +11,9 @@ load_dotenv()
 c = Client(api_server="http://graphql:4200")
 try:
     c.create_tenant("CB_ETL", "cb-etl")
+except:
+    pass
+try:
     c.create_project("CB_ETL")
 except:
     pass
@@ -137,7 +140,5 @@ with Flow("CB_ETL") as flow:
 
 
 if __name__ == "__main__":
-    flow.register(
-        project_name="CB_ETL",
-    )
-    flow.run_agent(api_key=c.api_key)
+    flow.register(project_name="CB_ETL")
+    flow.run_agent()
