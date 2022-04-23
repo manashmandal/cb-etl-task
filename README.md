@@ -56,6 +56,26 @@ Go to `http://localhost:8080` where a UI will be shown. Here is a simple demonst
 
 ![img](./assets/schema.png)
 
+## Where to see the loaded data
+
+The PostgreSQL configuration is given below,
+
+```python
+dbconfig = {
+    "host": "postgres",
+    "port": "5432",
+    "database": "prefect_server",
+    "user": "prefect",
+    "password": "test-password",
+}
+```
+
+Any PostgreSQL client should work. The loaded data is located at `public.etl_data`.
+
+Here is an screenshot after the workflow has been successfully run.
+
+![img](./assets/db.png)
+
 ## Work Procedure
 
 ## Extract
